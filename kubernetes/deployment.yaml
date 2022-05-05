@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: toy-go-server
+  labels:
+    app: toy-go-service
+    component: server
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: toy-go-service
+      component: server
+  template:
+    metadata:
+      labels:
+        app: toy-go-service
+        component: server
+    spec:
+      containers:
+      - name: toy-go-server
+        image: us-central1-docker.pkg.dev/linen-analyst-344721/docker-playground-images/toy-go-server:904af2 #image I pushed from: https://github.com/hswaffield/toy-go-server/tree/main
+        ports:
+        - containerPort: 8080
